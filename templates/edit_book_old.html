@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑书籍</title>
+</head>
+<body>
+<h1>编辑书籍</h1>
+<form action="/edit_book/" method="post">
+    <p>书名：
+        <input type="text" name="book_id" value="{{ book.id }}" style="display: none">
+        <input type="text" name="book_title" value="{{ book.title }}">
+    </p>
+    <p>出版社：
+        <select name="publisher">
+            {% for publisher in publisher_list %}
+                {# 如果书的出版社id值等于当前循环的publisher.id，则默认选中selected #}
+                {% if book.publisher.id == publisher.id %}
+                    <option selected value="{{ publisher.id }}">{{ publisher.name }}</option>
+                    {# 否则不选中 #}
+                {% else %}
+                    <option value="{{ publisher.id }}">{{ publisher.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="提交">
+    </p>
+    <p style="color: red">{{ error }}</p>
+</form>
+<script src="/static/jquery-3.4.1.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表页</title>
+</head>
+<body>
+
+<a href="/add_user/">添加用户</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>id</th>
+        <th>name</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in user_list %}
+        <tr>
+            <td>{{ forloop.counter}}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>
+                <a href="/delete_user/?id={{ user.id }}">删除</a>
+                <a href="/edit_user/?id={{ user.id }}">编辑</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script src="jquery-3.4.1.min.js"></script>
+</body>
+</html>
