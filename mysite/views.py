@@ -193,23 +193,23 @@ def edit_publisher(request):
     # 修改后POST的数据
     if request.method == "POST":
         # 获取新的名字
-        edit_id = request.POST.get("id", None)
-        new_name = request.POST.get("publisher_name", None)
+        edit_publisher_id = request.POST.get("id", None)
+        new_publisher_name = request.POST.get("publisher_name", None)
         # 更新
         # 根据id取到编辑的是哪用户
-        edit_obj = models.Publisher.objects.get(id=edit_id)
-        edit_obj.name = new_name
-        edit_obj.save() # 把修改提交
+        edit_obj = models.Publisher.objects.get(id=edit_publisher_id)
+        edit_obj.name = new_publisher_name
+        edit_obj.save() # 把修改提交到数据库
 
         # 跳转
         return redirect("/publisher_list/")
 
 
     # 从GET请求中获取到当前编辑的用户对象的id
-    edit_id = request.GET.get("id", None)
-    if edit_id:
+    edit_publisher_id = request.GET.get("id", None)
+    if edit_publisher_id:
         # 查找到当前编辑的用户对象
-        publisher_obj = models.Publisher.objects.get(id=edit_id)
+        publisher_obj = models.Publisher.objects.get(id=edit_publisher_id)
         return render(request, "edit_publisher.html", {"publisher": publisher_obj})
     else:
         return HttpResponse("编辑的出版社不存在！")
